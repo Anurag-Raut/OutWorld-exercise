@@ -26,7 +26,7 @@ function App() {
   const [TableData,setTableData]=useState<DbFormInterface[]>([]);
   useEffect(()=>{
     async function fetchData(){
-      const res=await axios.post(`${'https://outworld-exercise1-backend.onrender.com'}/api/getTableData`,{});
+      const res=await axios.post(`${'http://143.110.188.142'}/api/getTableData`,{});
       setTableData(res.data);
       console.log(res.data);
    
