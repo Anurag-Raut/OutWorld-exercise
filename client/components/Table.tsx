@@ -5,6 +5,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { socket } from '../src/socket'
 import TableInput from './tableInput';
+import { Validation } from '../utils/validation';
+import SearchSelect from './searchSelect';
+import { states } from '../utils/arrays';
 
 
 
@@ -32,7 +35,13 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
     }
 
     async function updateData(data: DbFormInterface) {
+        if(Validation(data,document.getElementById('table-email'),document.getElementById('table-contact_number'),document.getElementById('table-state'))){
+            return;
+        }
+        
         await axios.post('http://localhost:5000/api/updateTableData', data)
+
+        setEditIndex(-1) 
     }
         
     // }
@@ -104,23 +113,29 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
                                 editIndex === item.id ?
                                     <tr className=" text-black  bg-[#FAF0E6] " key={index}>
                                         <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap ">
-                                        <TableInput value={editFormData?.name} onChange={(newValue:string)=>{setEditFormData({...editFormData,name:newValue})}} type='text' placeholder='enter name'  />
+                                            <TableInput id='table-name' value={editFormData?.name} onChange={(newValue:string)=>{setEditFormData({...editFormData,name:newValue})}} type='text' placeholder='enter name'  />
                                         </th>
                                         <td className="px-6 py-4">
-                                        <TableInput value={editFormData?.email} onChange={(newValue:string)=>{setEditFormData({...editFormData,email:newValue})}} type='text' placeholder='enter email'  />
+                                            <TableInput id='table-email' value={editFormData?.email} onChange={(newValue:string)=>{setEditFormData({...editFormData,email:newValue})}} type='text' placeholder='enter email'  />
                                         </td>
                                         <td className="px-6 py-4">
-                                        <TableInput value={editFormData?.state} onChange={(newValue:string)=>{setEditFormData({...editFormData,state:newValue})}} type='text' placeholder='enter state'  />
+                                            <div className='bg-[#FAF0E6] '>
+
+                                        <SearchSelect value={editFormData?.state} onChange={(newValue:string)=>{setEditFormData({...editFormData,state:newValue})}} inputClass='block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-blue-300 appearance-none  focus:border-blue-600 peer' options={states}   />
+                                        <div id='table-state' className='text-red-500 hidden'>Incorrect Format !</div>
+                                            </div>
+
+                                            {/* <TableInput id='table-state' value={editFormData?.state} onChange={(newValue:string)=>{setEditFormData({...editFormData,state:newValue})}} type='text' placeholder='enter state'  /> */}
                                         </td>
                                         <td className="px-6 py-4">
-                                        <TableInput value={editFormData?.contactnumber} onChange={(newValue:string)=>{setEditFormData({...editFormData,contactnumber:newValue})}} type='text' placeholder='enter contactNumber'  />
+                                            <TableInput id='table-contact_number' value={editFormData?.contactnumber} onChange={(newValue:string)=>{setEditFormData({...editFormData,contactnumber:newValue})}} type='text' placeholder='enter contactNumber'  />
                                         </td>
                                         <td className="px-6 py-4">
-                                        <TableInput value={editFormData?.city} onChange={(newValue:string)=>{setEditFormData({...editFormData,city:newValue})}} type='text' placeholder='enter contactNumber'  />
+                                            <TableInput id='table-city' value={editFormData?.city} onChange={(newValue:string)=>{setEditFormData({...editFormData,city:newValue})}} type='text' placeholder='enter contactNumber'  />
                                         </td>
 
                                         <td className="px-6 py-4">
-                                            <button className='font-bold text-green-500 px-2' onClick={() => { updateData(editFormData); setEditIndex(-1) }} >Save</button>
+                                            <button className='font-bold text-green-500 px-2' onClick={() => { updateData(editFormData)}} >Save</button>
                                             <button className='font-bold text-red-500 px-2' onClick={() => { setEditIndex(-1)}} >Cancel</button>
                                         </td>
 

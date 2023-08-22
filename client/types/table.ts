@@ -1,9 +1,10 @@
+import { states } from "../utils/arrays";
 export interface FormInterface{
 
     name: string,
     email: string,
     contactnumber:string,
-    state: string,
+    state: typeof states[number];
     city: string,
 
 }
