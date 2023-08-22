@@ -2,7 +2,6 @@ const { Pool } = require("pg");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const createSubscriber = require("pg-listen")
 const { getTableData, postTableData, deleteTableData, updateTableData } = require("./functions/functions");
 require("dotenv").config();
 
