@@ -8,7 +8,9 @@ import TableInput from './tableInput';
 import { Validation } from '../utils/validation';
 import SearchSelect from './searchSelect';
 import { states } from '../utils/arrays';
+// import dotenv from 'dotenv'
 
+// dotenv.config();
 
 
 export default function Table({ Data, setData }: { Data: DbFormInterface[], setData: any }) {
@@ -29,7 +31,7 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
 
 
     async function DeleteData(id: number) {
-        await axios.post('http://localhost:5000/api/deleteTableData', { id: id })
+        await axios.post(`${'https://outworld-exercise1-backend.onrender.com'}/deleteTableData`, { id: id })
     
     
     }
