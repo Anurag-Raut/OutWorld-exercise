@@ -39,12 +39,12 @@ async function connect() {
 
 connect().then(()=>{
 
-    io.on('connection',(socket)=>{
+
 
         client.on('notification', (notification) => {
             const payload = JSON.parse(notification.payload);
-            console.log(notification)
-            console.log('Received notification on channel', notification.channel);
+            // console.log(notification)
+            // console.log('Received notification on channel', notification.channel);
             console.log('Notification payload:', payload);
 
             switch(payload.operation){
@@ -67,7 +67,7 @@ connect().then(()=>{
     
        
     
-    })
+
     
 
 

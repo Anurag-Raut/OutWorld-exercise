@@ -2,7 +2,7 @@ export interface FormInterface{
 
     name: string,
     email: string,
-    contactNumber:string,
+    contactnumber:string,
     state: string,
     city: string,
 

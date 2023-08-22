@@ -1,13 +1,12 @@
-
 const getTableData =async (client,table_name)=>{
 
-    const query = `SELECT * FROM ${table_name}`;
+    const query = `SELECT * FROM ${table_name} ORDER BY id`;
     const result= await client.query(query);
     return result;
 }
 
 const postTableData =async (client,table_name,data)=>{
-    const query = `INSERT INTO ${table_name}  (name, email, contactNumber, state, city) VALUES ('${data.name}','${data.email}','${data.contactNumber}','${data.state}','${data.city}')`;
+    const query = `INSERT INTO ${table_name}  (name, email, contactNumber, state, city) VALUES ('${data.name}','${data.email}','${data.contactnumber}','${data.state}','${data.city}')`;
 
     console.log(query,'qquery')
     const result=await client.query(query);
@@ -25,7 +24,7 @@ const deleteTableData =async (client,table_name,data)=>{
 
 //write code to update data from table
 const updateTableData =async (client,table_name,data)=>{
-    const query = `UPDATE ${table_name} SET name = '${data.name}', email = '${data.email}', contactNumber = '${data.contactNumber}', state = '${data.state}', city = '${data.city}' WHERE id = ${data.id}`;
+    const query = `UPDATE ${table_name} SET name = '${data.name}', email = '${data.email}', contactNumber = '${data.contactnumber}', state = '${data.state}', city = '${data.city}' WHERE id = ${data.id}`;
 
     console.log(query,'qquery')
     const result=await client.query(query);
@@ -42,4 +41,4 @@ const getFormData =async (client,table_name,data)=>{
 
 
 
-module.exports={getTableData,postTableData,deleteTableData,updateTableData};
+module.exports= {getTableData,postTableData,deleteTableData,updateTableData};

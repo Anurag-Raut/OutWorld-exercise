@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const createSubscriber = require("pg-listen")
-const { getTableData, postTableData, deleteTableData } = require("./functions/functions");
+const { getTableData, postTableData, deleteTableData, updateTableData } = require("./functions/functions");
 require("dotenv").config();
 
 app.use(cors());
