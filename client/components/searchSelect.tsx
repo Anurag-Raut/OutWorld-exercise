@@ -6,7 +6,7 @@ interface SearchSelectProps {
     placeholder?: string;
     options: string[]
     onChange: (newValue: any) => void;
-    inputClass:string
+    inputClass:string;
 
 }
 
@@ -48,7 +48,7 @@ export default function SearchSelect({ options, value, onChange, placeholder,inp
             {open && (
                 <ul
                     onClick={() => setOpen(!open)}
-                    className="w-[300px] text-inherit min-h-[200px] bg-inherit absolute top-[60px] max-h-[500px] h-[200px]   mt-2 bg-transparent  rounded shadow-lg z-70  overflow-y-auto  "
+                    className="w-[300px] text-inherit min-h-[200px]  absolute top-[60px] max-h-[500px] h-[200px]   mt-2   rounded shadow-lg z-70  overflow-y-auto bg-inherit"
                 >
                     {filteredItems.map(item => (
                         <li
