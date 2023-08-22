@@ -79,8 +79,8 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
     }, []);
 
     return (
-        <div className="relative overflow-x-auto rounded-xl">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <div className="relative overflow-x-auto rounded-xl h-full">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 h-full">
                 <thead className="text-xs text-gray-300 uppercase bg-[#352F44]   ">
                     <tr>
                         <th scope="col" className="px-6 py-3">
@@ -111,17 +111,17 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
                             {
 
                                 editIndex === item.id ?
-                                    <tr className=" text-black  bg-[#FAF0E6] " key={index}>
+                                    <tr className=" text-black  bg-[#FAF0E6] h-full" key={index}>
                                         <th scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap ">
                                             <TableInput id='table-name' value={editFormData?.name} onChange={(newValue:string)=>{setEditFormData({...editFormData,name:newValue})}} type='text' placeholder='enter name'  />
                                         </th>
                                         <td className="px-6 py-4">
                                             <TableInput id='table-email' value={editFormData?.email} onChange={(newValue:string)=>{setEditFormData({...editFormData,email:newValue})}} type='text' placeholder='enter email'  />
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className='bg-[#FAF0E6] '>
+                                        <td className="px-6 py-4 h-full">
+                                            <div className='bg-[#FAF0E6]  '>
 
-                                        <SearchSelect value={editFormData?.state} onChange={(newValue:string)=>{setEditFormData({...editFormData,state:newValue})}} inputClass='block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-blue-300 appearance-none  focus:border-blue-600 peer' options={states}   />
+                                        <SearchSelect value={editFormData?.state} onChange={(newValue:string)=>{setEditFormData({...editFormData,state:newValue})}} inputClass='block py-2 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-blue-300 appearance-none  focus:border-blue-600 peer' options={states}   />
                                         <div id='table-state' className='text-red-500 hidden'>Incorrect Format !</div>
                                             </div>
 

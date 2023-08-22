@@ -41,19 +41,19 @@ export default function SearchSelect({ options, value, onChange, placeholder,inp
 
 
     return (
-        <div className="w-full relative bg-inherit rounded-full z-30" ref={autoCompleteRef}>
+        <div className="w-full relative bg-inherit rounded-full z-30 text-inderit " ref={autoCompleteRef}>
 
 
 
             {open && (
                 <ul
                     onClick={() => setOpen(!open)}
-                    className="w-[300px] min-h-[200px] bg-inherit absolute bottom-[60px] max-h-[500px] h-[200px]   mt-2 bg-transparent  rounded shadow-lg z-70  overflow-y-auto  "
+                    className="w-[300px] text-inherit min-h-[200px] bg-inherit absolute top-[60px] max-h-[500px] h-[200px]   mt-2 bg-transparent  rounded shadow-lg z-70  overflow-y-auto  "
                 >
                     {filteredItems.map(item => (
                         <li
                             key={item}
-                            className="w-full text-white rounded-xl p-4 mt-2 hover:bg-gray-500 "
+                            className="w-full text-inherit rounded-xl p-4 mt-2 hover:bg-gray-500 "
                             onClick={() => { handleChange(item) }}
                         >
                             {item}

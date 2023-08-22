@@ -19,7 +19,7 @@ export default function TableInput({value, onChange,placeholder,type,id}:InputPr
        
       
             <div className="relative z-0">
-                <input value={value} onChange={handleChange}  type={type} id="floating_standard" className="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-blue-300 appearance-none  focus:border-blue-600 peer" placeholder={placeholder} />
+                <input value={value} onChange={handleChange}  type={type} id="floating_standard" className="block py-2 px-3 w-full text-sm text-gray-900 bg-transparent border-blue-300 appearance-none  focus:border-transparent peer" placeholder={placeholder} />
                 <div id={id} className='text-red-500 hidden'>Incorrect Format !</div>
             </div>
    

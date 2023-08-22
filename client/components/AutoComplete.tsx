@@ -25,7 +25,7 @@ export default function AutoComplete({  label,id,InputElement }: AutoCompletePro
         <div className=" flex my-7 w-full justify-around  sm:py-1">
             <div className='w-[30%] text-white'>{label}</div>
 
-            <div className='w-[50%] bg-[#333333] rounded-full '    >
+            <div className='w-[50%] bg-[#333333] text-white rounded-full '    >
 
                 {InputElement}
 
