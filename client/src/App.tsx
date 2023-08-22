@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import Table from '../components/Table'
-import {FormInterface} from '../types/table'
+import {FormInterface,DbFormInterface} from '../types/table'
+import axios from 'axios'
 import './App.css'
 
 function App() {
@@ -15,9 +16,37 @@ function App() {
     city: '',
   })
 
-  const [TableData,setTableData]=useState<FormInterface[]>([])
+  const [TableData,setTableData]=useState<DbFormInterface[]>([]);
+  useEffect(()=>{
+    async function fetchData(){
+      const res=await axios.post('http://localhost:5000/api/getTableData',{});
+      setTableData(res.data);
+      console.log(res.data);
+   
+    }
 
-  console.log(FormData)
+  fetchData();
+  },[]);
+
+
+  async function insertIntoTable(inputData:FormInterface){
+
+    try{
+      const res=await axios.post('http://localhost:5000/api/postTableData',inputData);
+    
+    }
+    catch(err){
+      console.log(err);
+    }
+
+
+
+
+    
+
+  }
+
+  console.log(TableData)
 
   return (
     <>
@@ -29,10 +58,10 @@ function App() {
         <Input label={'Enter state'} type='text' value={FormData.state} onChange={(newValue)=>{setFormData({...FormData,state:newValue})}}  />
         <Input label={'Enter city'} type='text' value={FormData.city} onChange={(newValue)=>{setFormData({...FormData,city:newValue})}}  />
 
-        <Button label='Submit' onClick={()=>{setTableData([...TableData,{...FormData}])}} />
+        <Button label='Submit' onClick={()=>{insertIntoTable(FormData)}} />
       </div>
 
-      <Table Data={TableData} />
+      <Table Data={TableData} setData={setTableData} />
 
     </>
   )

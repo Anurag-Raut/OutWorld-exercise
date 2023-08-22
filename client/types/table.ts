@@ -7,3 +7,9 @@ export interface FormInterface{
     city: string,
 
 }
+
+export interface DbFormInterface extends FormInterface{
+    id: number,
+   
+
+}

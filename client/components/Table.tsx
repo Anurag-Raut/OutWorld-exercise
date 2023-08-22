@@ -1,8 +1,40 @@
 
-import * as React from 'react';
-import { FormInterface } from '../types/table';
 
-export default function Table({ Data }: { Data: FormInterface[] }) {
+import { DbFormInterface } from '../types/table';
+import axios from 'axios';
+import { useEffect } from 'react';
+import io from 'socket.io-client';
+const socket=io('http://localhost:4000');
+
+
+async function DeleteData(id: number) {
+    await axios.post('http://localhost:5000/api/deleteTableData', { id: id })
+    
+
+}
+
+export default function Table({ Data,setData }: { Data: DbFormInterface[],setData:any }) {
+
+    useEffect(() => {
+        socket.on('insert', (data: any) => {
+            console.log(data);
+        });
+
+        socket.on('delete', (id: number) => {
+            setData((prevData: DbFormInterface[]) => prevData.filter((item: DbFormInterface) => item.id !== id));
+        });
+
+        socket.on('update', (data: any) => {
+            console.log(data);
+        });
+
+        return () => {
+            socket.off('insert');
+            socket.off('delete');
+            socket.off('update');
+        };
+    }, []); 
+
     return (
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -23,10 +55,13 @@ export default function Table({ Data }: { Data: FormInterface[] }) {
                         <th scope="col" className="px-6 py-3">
                             city
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {Data?.map((item,index) => (
+                    {Data?.map((item, index) => (
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {item.name}
@@ -42,7 +77,14 @@ export default function Table({ Data }: { Data: FormInterface[] }) {
                             </td>
                             <td className="px-6 py-4">
                                 {item.city}
+                            </td>4
+
+                            <td className="px-6 py-4">
+                                <button>Edit</button>
+                                <button onClick={() => DeleteData(item.id)} >Delete</button>
                             </td>
+
+
                         </tr>
                     ))}
                 </tbody>
