@@ -31,7 +31,7 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
 
 
     async function DeleteData(id: number) {
-        await axios.post(`${'https://outworld-exercise1-backend.onrender.com'}/deleteTableData`, { id: id })
+        await axios.post(`${'https://outworld-exercise1-backend.onrender.com'}/api/deleteTableData`, { id: id })
     
     
     }
@@ -41,7 +41,7 @@ export default function Table({ Data, setData }: { Data: DbFormInterface[], setD
             return;
         }
         
-        await axios.post('http://localhost:5000/api/updateTableData', data)
+        await axios.post(`${'https://outworld-exercise1-backend.onrender.com'}/api/updateTableData`, data)
 
         setEditIndex(-1) 
     }
